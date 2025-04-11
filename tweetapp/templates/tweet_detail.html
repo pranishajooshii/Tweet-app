@@ -3,22 +3,62 @@
 {% block title %}{{ tweet.title }}{% endblock %}
 
 {% block content %}
-  <div class="container mt-5">
-    <div class="card">
-      <div class="card-body">
-        <h1 class="card-title">{{ tweet.title }}</h1>
-        <p class="card-text">{{ tweet.text }}</p>
-        <p class="card-text"><small class="text-muted">By {{ tweet.user.username }} on {{ tweet.created_at }}</small></p>
-        
-        {% if tweet.photo %}
-          <img src="{{ tweet.photo.url }}" class="img-fluid" alt="Tweet photo" />
-        {% else %}
-          <p>No image for this tweet.</p>
-        {% endif %}
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow-sm rounded-3 border-0 overflow-hidden">
+        <div class="card-body p-4">
+          <!-- Header with title and category -->
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <h1 class="card-title display-6 fw-bold mb-0">{{ tweet.title }}</h1>
+            {% if tweet.category %}
+            <span class="badge bg-primary bg-opacity-10 text-primary fs-6 rounded-pill px-3 py-2">
+              {{ tweet.category }}
+            </span>
+            {% endif %}
+          </div>
 
-        <!-- You can add more fields here based on your Tweet model -->
-        <a href="{% url 'list_tweet' %}" class="btn btn-secondary">Back to Tweets</a>
+          <!-- Tweet content -->
+          <p class="card-text fs-5 text-muted mb-4">{{ tweet.text|linebreaksbr }}</p>
+
+          <!-- Metadata row -->
+          <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+            <div class="d-flex align-items-center gap-3">
+              <span class="text-muted">
+                <i class="bi bi-person-fill me-1"></i>by  {{ tweet.user.username }}
+              </span>
+              <span class="text-muted">
+                <i class="bi bi-calendar me-1"></i> {{ tweet.created_at|date:"M d, Y H:i" }}
+              </span>
+            </div>
+            
+          </div>
+
+          <!-- Image section -->
+          {% if tweet.photo %}
+          <div class="mb-4 text-center bg-light rounded-3 overflow-hidden">
+            <img src="{{ tweet.photo.url }}" 
+                 class="img-fluid w-100" 
+                 style="max-height: 500px; object-fit: contain;" 
+                 alt="Tweet photo">
+          </div>
+          {% else %}
+          <div class="mb-4 text-center py-5 bg-light bg-opacity-25 rounded-3">
+            <i class="bi bi-image text-muted fs-1 opacity-50"></i>
+            <p class="text-muted mt-2 mb-0">No image attached</p>
+          </div>
+          {% endif %}
+
+          <!-- Action buttons -->
+          <div class="d-flex flex-wrap justify-content-between gap-2 pt-3">
+            <a href="{% url 'list_tweet' %}" class="btn btn-outline-secondary px-4">
+              <i class="bi bi-arrow-left me-2"></i>Back to Tweets
+            </a>
+            
+          </div>
+        </div>
       </div>
     </div>
   </div>
+</div>
 {% endblock %}
