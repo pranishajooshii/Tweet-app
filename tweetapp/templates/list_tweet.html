@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+ {% block title %}Tweet App{% endblock %} 
+{% block content %}
+<div class="container my-5">
+  <h1 class="text-center mb-4 fw-bold">Welcome to Tweet App</h1>
+
+  <div class="d-flex justify-content-end mb-4">
+    <a class="btn btn-success" href="{% url 'create_tweet' %}"
+      >+ Create Tweet</a
+    >
+  </div>
+
+  {% if tweets %}
+  <h2>All Tweets</h2>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for tweet in tweets %}
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <div
+          class="card-img-container"
+          style="background-color: #f8f9fa; padding: 10px"
+        >
+          {% if tweet.photo %}
+          <img
+            src="{{ tweet.photo.url }}"
+            class="card-img-top"
+            alt="Tweet photo"
+            style="object-fit: cover; height: 200px; border-radius: 8px"
+          />
+          {% else %}
+          <div
+            class="bg-secondary text-white d-flex align-items-center justify-content-center"
+            style="height: 200px; border-radius: 8px"
+          >
+            No Image
+          </div>
+          {% endif %}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title mb-1">{{ tweet.user.username }}</h5>
+          <p class="card-text text-muted">{{ tweet.text|truncatewords:20 }}</p>
+          <div>
+            <a href="{% url 'tweet_detail' tweet.id %}" class="btn btn-outline-primary btn-sm me-1">View</a>
+
+            {% if tweet.user == user %}
+            <a
+              href="{% url 'edit_tweet' tweet.id %}"
+              class="btn btn-outline-warning btn-sm me-1"
+              >Edit</a
+            >
+            <a
+              href="{% url 'delete_tweet' tweet.id %}"
+              class="btn btn-outline-danger btn-sm"
+              >Delete</a
+            >
+
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="text-center text-muted">No tweets found. Be the first to post!</p>
+  {% endif %}
+</div>
+{% endblock %}

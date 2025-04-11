@@ -128,6 +128,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+LOGIN_URL='/accounts/login'
+
+LOGIN_REDIRECT_URL='/tweet/'
+LOGOUT_REDIRECT_URL='/tweet/'
+
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 

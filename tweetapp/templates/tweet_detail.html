@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}{{ tweet.title }}{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title">{{ tweet.title }}</h1>
+        <p class="card-text">{{ tweet.text }}</p>
+        <p class="card-text"><small class="text-muted">By {{ tweet.user.username }} on {{ tweet.created_at }}</small></p>
+        
+        {% if tweet.photo %}
+          <img src="{{ tweet.photo.url }}" class="img-fluid" alt="Tweet photo" />
+        {% else %}
+          <p>No image for this tweet.</p>
+        {% endif %}
+
+        <!-- You can add more fields here based on your Tweet model -->
+        <a href="{% url 'list_tweet' %}" class="btn btn-secondary">Back to Tweets</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

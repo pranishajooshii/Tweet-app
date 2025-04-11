@@ -1,0 +1,20 @@
+<!-- tweet_list.html -->
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 class="mt-4 text-center">Tweet List</h1>
+
+  {% if tweets %}
+    <h3 class="mt-3">Search results for: "{{ query }}"</h3>
+    <div class="list-group">
+      {% for tweet in tweets %}
+        <a href="{% url 'tweet_detail' tweet.id %}" class="list-group-item list-group-item-action">
+          <h5>{{ tweet.title }}</h5>
+          <p>{{ tweet.text }}</p>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No tweets found for your search.</p>
+  {% endif %}
+{% endblock %}

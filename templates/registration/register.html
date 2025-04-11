@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container my-5">
+        <!-- Heading -->
+        <h1 class="text-center text-primary mb-4">Register your account here</h1>
+
+        <!-- Registration Form Card -->
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <!-- Form -->
+                <form method="post" class="form">
+                    {% csrf_token %}
+                    
+                    <!-- Form Fields -->
+                    <div class="mb-3">
+                        {{ form.as_p }}
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary px-4 py-2">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Login Link -->
+        <div class="text-center mt-3">
+            <p>Already have an account? <a href="{% url 'login' %}" class="text-decoration-none">Login here</a></p>
+        </div>
+    </div>
+{% endblock %}
