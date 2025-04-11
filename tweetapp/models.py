@@ -12,8 +12,8 @@ class Tweet(models.Model):
 
     # Fields
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=100)
-    text = models.TextField(max_length=250)
+    title = models.CharField(max_length=200)
+    text = models.TextField(max_length=500)
     type = models.CharField(
         max_length=50, choices=TWEET_CHOICES, default='education'  # Default type if not specified
     )

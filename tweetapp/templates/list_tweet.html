@@ -57,10 +57,8 @@
           <!-- Card Body -->
           <div class="card-body d-flex flex-column shadow">
             <div class="d-flex align-items-center mb-2">
-              <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-2 me-2">
-                <i class="bi bi-person-fill"></i>
-              </div>
-              <h5 class="card-title mb-0">{{ tweet.user.username }}</h5>
+              
+              <h5 class="card-title mb-0">{{ tweet.title }}</h5>
             </div>
             
             <p class="card-text text-muted mb-3">{{ tweet.text|truncatewords:25 }}</p>
