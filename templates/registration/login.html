@@ -1,40 +1,142 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
-        <!-- Login Form Card -->
-        <div class="card shadow-sm" style="width: 100%; max-width: 400px;">
-            <div class="card-body">
-                <!-- Heading -->
-                <h1 class="text-center text-primary mb-4">Login</h1>
-
-                <!-- Form -->
-                <form method="post">
-                    {% csrf_token %}
-                    
-                    <!-- Username Field -->
-                    <div class="mb-3">
-                        <label for="id_username" class="form-label">Username</label>
-                        {{ form.username }}
-                    </div>
-
-                    <!-- Password Field -->
-                    <div class="mb-3">
-                        <label for="id_password" class="form-label">Password</label>
-                        {{ form.password }}
-                    </div>
-
-                    <!-- Submit Button -->
+<div class="container-fluid " style="min-height: 100vh;">
+    <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="col-md-8 col-lg-6 col-xl-4">
+            <!-- Login Card -->
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                <!-- Card Header with Gradient Background -->
+                <div class="card-header bg-primary text-white py-4">
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary px-4 py-2">Login</button>
+                        <i class="bi bi-person-circle fs-1 mb-2"></i>
+                        <h2 class="h3 mb-0">Welcome Back</h2>
                     </div>
-                </form>
+                </div>
                 
-                <!-- Register Link -->
-                <div class="text-center mt-3">
-                    <p>Don't have an account? <a href="{% url 'register' %}" class="text-decoration-none">Register here</a></p>
+                <!-- Card Body -->
+                <div class="card-body p-4 p-md-5">
+                    <!-- Error Messages -->
+                    {% if form.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        Invalid username or password. Please try again.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Login Form -->
+                    <form method="post" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        
+                        <!-- Username Field -->
+                        <div class="mb-4">
+                            <label for="id_username" class="form-label fw-bold">
+                                <i class="bi bi-person-fill me-1"></i>Username
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light">
+                                    <i class="bi bi-at text-primary"></i>
+                                </span>
+                                <input type="text" 
+                                       name="username" 
+                                       id="id_username" 
+                                       class="form-control py-2" 
+                                       placeholder="Enter your username" 
+                                       required>
+                            </div>
+                        </div>
+                        
+                        <!-- Password Field -->
+                        <div class="mb-4">
+                            <label for="id_password" class="form-label fw-bold">
+                                <i class="bi bi-lock-fill me-1"></i>Password
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light">
+                                    <i class="bi bi-key text-primary"></i>
+                                </span>
+                                <input type="password" 
+                                       name="password" 
+                                       id="id_password" 
+                                       class="form-control py-2" 
+                                       placeholder="Enter your password" 
+                                       required>
+                            </div>
+                            
+                        </div>
+                        
+                        <!-- Submit Button -->
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg rounded-pill shadow-sm py-2">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>Login
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <!-- Social Login  -->
+                    {% comment %} <div class="text-center my-4">
+                        <div class="position-relative">
+                            <hr class="text-muted">
+                            <span class="position-absolute top-50 start-50 translate-middle bg-white px-2 text-muted small">OR</span>
+                        </div>
+                        <div class="d-flex justify-content-center gap-3 mt-3">
+                            <a href="#" class="btn btn-outline-primary rounded-circle p-2">
+                                <i class="bi bi-google fs-5"></i>
+                            </a>
+                            <a href="#" class="btn btn-outline-primary rounded-circle p-2">
+                                <i class="bi bi-facebook fs-5"></i>
+                            </a>
+                            <a href="#" class="btn btn-outline-primary rounded-circle p-2">
+                                <i class="bi bi-twitter fs-5"></i>
+                            </a>
+                        </div>
+                    </div> {% endcomment %}
+                    
+                    <!-- Register Link -->
+                    <div class="text-center mt-3 pt-3 border-top">
+                        <p class="text-muted mb-0">Don't have an account? 
+                            <a href="{% url 'register' %}" class="text-decoration-none fw-bold">
+                                <i class="bi bi-person-plus me-1"></i>Register here
+                            </a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<!-- Custom Styling -->
+<style>
+
+    
+    /* Input field styling */
+    .form-control {
+        border-radius: 0.5rem;
+        border-left: 0;
+    }
+    
+    .input-group-text {
+        border-radius: 0.5rem 0 0 0.5rem !important;
+        border-right: 0;
+    }
+    
+    /* Button hover effect */
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    /* Card transition */
+    .card {
+        transition: all 0.3s ease;
+    }
+    
+    /* Social buttons */
+    .btn-outline-primary:hover {
+        background-color: var(--bs-primary);
+        color: white !important;
+    }
+</style>
 {% endblock %}
