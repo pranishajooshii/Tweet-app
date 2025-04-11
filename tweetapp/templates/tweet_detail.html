@@ -11,15 +11,14 @@
           <!-- Header with title and category -->
           <div class="d-flex justify-content-between align-items-start mb-3">
             <h1 class="card-title display-6 fw-bold mb-0">{{ tweet.title }}</h1>
-            {% if tweet.category %}
+            {% if tweet.type %}
             <span class="badge bg-primary bg-opacity-10 text-primary fs-6 rounded-pill px-3 py-2">
-              {{ tweet.category }}
+              {{ tweet.type }}
             </span>
             {% endif %}
           </div>
 
-          <!-- Tweet content -->
-          <p class="card-text fs-5 text-muted mb-4">{{ tweet.text|linebreaksbr }}</p>
+         
 
           <!-- Metadata row -->
           <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
@@ -48,6 +47,9 @@
             <p class="text-muted mt-2 mb-0">No image attached</p>
           </div>
           {% endif %}
+
+           <!-- Tweet content -->
+           <p class="card-text fs-5 text-muted mb-4">{{ tweet.text|linebreaksbr }}</p>
 
           <!-- Action buttons -->
           <div class="d-flex flex-wrap justify-content-between gap-2 pt-3">
